@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Test Chakmak</title>
+	</head>
+	<body>
+		<div id="content">
+		</div>
+		<footer>
+			<script type="text/javascript" src="../src/chakmak.js"></script>
+			<script type="text/javascript">
+
+				function clock(){
+					var date = new Date();
+					var time = [];
+					time.push(date.getHours());
+					time.push(date.getMinutes());
+					time.push(date.getSeconds());
+
+					return time.join(':');	
+				}
+
+				var pb = Chakmak.Publisher.create({'id': clock()});
+
+				var sb = Chakmak.Subscriber.create({
+					template: document.getElementById('content')
+				}, {render: function(){
+					this.template.innerHTML = this.publisher.id;
+				}});
+
+				sb.subscribe(pb, 'pub:change');
+
+				setInterval(function(){
+					pb.id = clock();
+				}, 1000)
+
+			</script>
+		</footer>
+	</body>
+</html>
