@@ -43,10 +43,12 @@
 
 				sb.subscribe(pb, 'pub:change');
 
+				pb.addProperty('name', '');
+
 				sb2.subscribe(pb, 'pub:change');
 
 				document.getElementById('name').addEventListener('keyup', function(){
-					pb.addProperty('name', this.value);
+					pb.name = this.value;
 				});
 
 				setInterval(function(){
