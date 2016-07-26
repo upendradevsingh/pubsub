@@ -106,8 +106,15 @@
 	 */
 
 	var pub = Chakmak.Publisher = function Publisher(){
-		this.private = {};
+		Object.defineProperty(this, 'private', {
+			value: {},
+			writable: true,
+			enumerable: false,
+			configurable: true
+		})
 	};
+
+	pub.prototype.addProperty = add;
 
 	/**
 	 * Subscriber Class
@@ -117,7 +124,12 @@
 	 * 
 	 */
 	var sub = Chakmak.Subscriber = function Subscriber(){
-		this.private = {};
+		Object.defineProperty(this, 'private', {
+			value: {},
+			writable: true,
+			enumerable: false,
+			configurable: true
+		})
 	};
 
 	// Subscriber default methods

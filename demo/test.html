@@ -6,6 +6,13 @@
 	<body>
 		<div id="content">
 		</div>
+		<p>
+			<input type="text" name="name" id="name" placeholder="Enter a text"/>
+		</p>
+		<div id="test">
+
+		</div>
+
 		<footer>
 			<script type="text/javascript" src="../src/chakmak.js"></script>
 			<script type="text/javascript">
@@ -28,7 +35,19 @@
 					this.template.innerHTML = this.publisher.id;
 				}});
 
+				var sb2 = Chakmak.Subscriber.create({
+					template: document.getElementById('test')
+				}, {render: function(){
+					this.template.innerHTML = this.publisher.name || '';
+				}});
+
 				sb.subscribe(pb, 'pub:change');
+
+				sb2.subscribe(pb, 'pub:change');
+
+				document.getElementById('name').addEventListener('keyup', function(){
+					pb.addProperty('name', this.value);
+				});
 
 				setInterval(function(){
 					pb.id = clock();
