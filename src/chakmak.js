@@ -32,10 +32,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-(function(root){
+;(function(definition){
+	var	hasDefine = typeof define === 'function' && define.amd,			// AMD
+		hasExports = typeof module !== 'undefined' && module.exports;	// Commonjs
+
+
+	// Setup the root object, `window` (`self`) in the browser, or `global` in the node.js server.
+    // We use `self` instead of `window` for `WebWorker` support.
+    
+    var root = (typeof self == 'object' && self.self === self && self) || (typeof global == 'object' && global.global === global && global);
+
+	if(hasDefine){
+		define(['exports'], function(exports) {
+		    // Export global even in AMD case
+			// Avoid duplicate bu default
+
+		    root.Chakmak = definition(exports);
+		});
+	// node.js or commonjs 
+	}else if(hasExports){
+		definition(exports);
+	// Finally, as browser global
+	}else{
+		definition(root);
+	}
+}(function(root){
 
 	var Chakmak = {};
+
 	root.Chakmak = Chakmak;
+
+	Chakmak.version = '0.0.1';
 
 	/**
 	 * Creates an object with given properties and methods
@@ -89,7 +116,7 @@
 		Object.defineProperty(this, key, {
 			get: function(){return this.private[key];},
 			set: function(newVal){
-				var event = new Event('pub:change');
+				var event = new Event(key + ':change');
 				console.log('The value has been changed from ' + this.private[key] + ' to ' +newVal);
 				this.private[key] = newVal;
 				document.dispatchEvent(event);
@@ -114,6 +141,9 @@
 		})
 	};
 
+	// Publisher public method
+	// Publisher prototype definition
+
 	pub.prototype.addProperty = add;
 
 	/**
@@ -132,7 +162,8 @@
 		})
 	};
 
-	// Subscriber default methods
+	// Subscriber public method
+	// Subscriber prototype definition
 
 	sub.prototype.subscribe = function(publisher, event){
 		var _this = this;
@@ -145,4 +176,4 @@
 	// This will create a new instance of a class without calling end user new explicitly 
 	Chakmak.Publisher.create = Chakmak.Subscriber.create = create;
 
-}(this));
+}));

@@ -1,0 +1,36 @@
+{
+  "name": "pubsub",
+  "version": "0.0.1",
+  "description": "A small javascript pubsub framework",
+  "main": "src/chakmak.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/upendradevsingh/pubsub.git"
+  },
+  "keywords": [
+    "pubsub",
+    "observer pattern",
+    "publish subscriber",
+    "javascript",
+    "nodejs",
+    "commonjs",
+    "amd"
+  ],
+  "author": "Upendra Dev Singh <upendradevsingh@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/upendradevsingh/pubsub/issues"
+  },
+  "homepage": "https://github.com/upendradevsingh/pubsub#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "mocha": "^2.5.3"
+  }
+}

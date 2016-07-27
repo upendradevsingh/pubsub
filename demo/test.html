@@ -41,11 +41,11 @@
 					this.template.innerHTML = this.publisher.name || '';
 				}});
 
-				sb.subscribe(pb, 'pub:change');
+				sb.subscribe(pb, 'id:change');
 
 				pb.addProperty('name', '');
 
-				sb2.subscribe(pb, 'pub:change');
+				sb2.subscribe(pb, 'name:change');
 
 				document.getElementById('name').addEventListener('keyup', function(){
 					pb.name = this.value;
