@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TODO</title>
+	<style type="text/css">
+
+	</style>
+</head>
+<body>
+	<section id="wrapper">
+		<header></header>
+		<main>
+			<section id="todos">
+				<input type="text" name="NewToDo" id="new-todo"/>
+				<button id="CreateToDO">Create</button>
+				<ul class="todo-list">
+				</ul>
+			</section>
+		</main>
+		<footer>
+			<script type="text/javascript" src="../src/chakmak.js"></script>
+			<script type="text/javascript">
+				var todoInput = document.getElementById('new-todo');
+				var button = document.getElementById('CreateToDO');
+
+				var todoList = Chakmak.Publisher.create();
+				var todoView = Chakmak.Subscriber.create({
+
+					template: document.querySelector('#todos .todo-list')
+				},
+				{
+					render: function(){
+						if(todoInput.value === '') {
+							return;
+						}
+						var todos = this.publisher[this.prop];
+						var text = todos[todos.length - 1] || '';
+
+						this.template.appendChild(this.createElement(text));
+					},
+					createElement: function(text){
+						var li = document.createElement('li');
+						li.innerHTML = text;
+
+						return li;
+					}
+
+				});	
+				//Add a new prop to todoList Publisher
+				todoList.addProperty('items', []);
+
+				button.addEventListener('click', function(){
+					// Everytime changing the memrory reference after a change.
+					// This could be a memory leak
+					// Need to find a better way to detect the change in non prem
+					var item = todoList.items.slice(0);
+					item.push(todoInput.value);
+					todoList.items = item.slice(0);
+					item = null;
+				});
+
+				//Subscribe to todoList
+				//todoView will listen to changes in todoList.items 
+
+				todoView.subscribe('items', todoList, 'items:change')
+
+			</script>
+		</footer>
+	</section>
+</body>
+</html>
