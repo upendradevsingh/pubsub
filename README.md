@@ -16,13 +16,15 @@ var Chakmak = require('chakmak').Chakmak;
 
 ### Browser default
 
-<script type="text/javascript" src="chakmak.min.js"></script>
+Add build/chakmak.min.js into your html page.
 
 
 ## Create a Publisher 
 
-      var pub1 = Chakmak.Publisher.create();
+      var pub1 = Chakmak.Publisher.create(); // Creating a empty piblisher
 
+      //Creating a publisher with default property and method
+      
       var pub2 = Chakmak.Publisher.create(
           {
               name: 'foo'
@@ -34,7 +36,7 @@ var Chakmak = require('chakmak').Chakmak;
           }
       );
 
-Add a new property to Publisher
+     //Add a new property to Publisher
 
       pub2.addProperty('cart', [
           {
