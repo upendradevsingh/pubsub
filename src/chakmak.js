@@ -2,14 +2,22 @@
  * **************************************************
  * **************************************************
  * **************************************************
- * ******************** CHAKMAK  *********************
+ * ******************** CHAKMAK *********************
+ * **************************************************
  * **************************************************
  * **************************************************
  */
 
+
+/**
+ * ****************************************************
+ * ***************** Version 0.0.2 ********************
+ * ****************************************************
+ */
+
 /**
  * @author Upendra Dev Singh
- * @description A small pubsub utility 
+ * @description A small javascript pubsub utility 
  *
  * MIT Licence
  */
@@ -110,6 +118,7 @@
 	 * @param {string} key   
 	 * @param {object|string} value 
 	 */
+	
 	function add(key, value){
 		this.private[key] = value;
 		
@@ -129,7 +138,7 @@
 	/**
 	 * Publisher Class
 	 * Publisher is a data model.
-	 * When Publisher detect a change in state it notify it all the Subscriber with Custom Javascript Event
+	 * When Publisher detect a change in state it notifies the change to all its Subscriber 
 	 */
 
 	var pub = Chakmak.Publisher = function Publisher(){
@@ -138,7 +147,7 @@
 			writable: true,
 			enumerable: false,
 			configurable: true
-		})
+		});
 	};
 
 	// Publisher public method
@@ -150,7 +159,7 @@
 	 * Subscriber Class
 	 * Subscriber is a View Object.
 	 * Subscriber will be subscribed to one or many Publisher.
-	 * When an publisher notify a change in state subcriber will execute its render method to update the view
+	 * When an publisher notify a change in state, subcriber will execute its render method to update the view
 	 * 
 	 */
 	var sub = Chakmak.Subscriber = function Subscriber(){
@@ -159,16 +168,31 @@
 			writable: true,
 			enumerable: false,
 			configurable: true
-		})
+		});
 	};
 
 	// Subscriber public method
 	// Subscriber prototype definition
 
-	sub.prototype.subscribe = function(publisher, event){
+	sub.prototype.subscribe = function(prop, publisher, event){
 		var _this = this;
-		this.publisher = publisher;
-		this.render();
+		var pub = publisher;
+
+		//Subscriber is subscribe to publisher object directly
+		if(typeof publisher === 'string' && typeof prop === 'object'){
+			publisher = prop;
+			event = pub;
+		}
+
+		//If Subscriber subscribes to a Publisher prop
+		if(typeof prop === 'string'){
+			this.prop = prop;
+		}
+
+		this.publisher = publisher; //Main publisher object reference will be provided to subscriber
+		this.render(); // Calling render method right after the subscribtion
+
+		//Listener to publisher event
 		document.addEventListener(event, _this.render.bind(_this));
 	}
 
