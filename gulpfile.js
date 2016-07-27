@@ -13,7 +13,7 @@ gulp.task('minify', function() {
     // This will minify and rename to *.min.js
     .pipe(uglify())
     .pipe(rename({ extname: '.min.js' }))
-    .pipe(gulp.dest(DEST));
+    .pipe(gulp.dest(DESTINATION));
 });
 
 gulp.task('lint', () => {
@@ -33,6 +33,6 @@ gulp.task('lint', () => {
         .pipe(eslint.failAfterError());
 });
 
-gulp.task('default', ['lint', 'minify'], function () {
+gulp.task('default', ['minify'], function () {
     console.log('Build successful!!');
 });
