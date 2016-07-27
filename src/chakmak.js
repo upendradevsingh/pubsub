@@ -62,7 +62,7 @@
 
 	root.Chakmak = Chakmak;
 
-	Chakmak.version = '0.0.1';
+	Chakmak.version = '0.0.2';
 
 	/**
 	 * Creates an object with given properties and methods
