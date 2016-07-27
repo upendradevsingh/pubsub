@@ -1,5 +1,5 @@
 {
-  "name": "pubsub",
+  "name": "chakmak",
   "version": "0.0.1",
   "description": "A small javascript pubsub framework",
   "main": "src/chakmak.js",
