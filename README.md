@@ -21,48 +21,44 @@ var Chakmak = require('chakmak').Chakmak;
 
 ## Create a Publisher 
 
-var pub1 = Chakmak.Publisher.create();
+      var pub1 = Chakmak.Publisher.create();
 
-var pub2 = Chakmak.Publisher.create(
-	{
-		name: 'foo'
-	},
-	{
-		displayName: function(){
-			return this.name;
-		}
-	}
-);
+      var pub2 = Chakmak.Publisher.create(
+          {
+              name: 'foo'
+          },
+          {
+              displayName: function(){
+                  return this.name;
+              }
+          }
+      );
 
 Add a new property to Publisher
 
-pub2.addProperty('cart', [
-	{
-		name: 'item1',
-		price: 100
-	},
-	{
-		name: 'item2',
-		price: 200
-	}
-]);
+      pub2.addProperty('cart', [
+          {
+              name: 'item1',
+              price: 100
+          },
+          {
+              name: 'item2',
+              price: 200
+          }
+      ]);
 
 ## Create a Subscriber
 
-var sub1 = Chakmak.Publisher.create(
-	{
-		template: document.getElementById('content')
-	},
-	{
-		render: function(){
+      var sub1 = Chakmak.Publisher.create(
+          {
+              template: document.getElementById('content')
+          },
+          {
+              render: function(){
 
-			this.template.innerHTML = this.publisher.name || '';
-		}
-	}
-); 
-// Subscribing to the publisher and an its change event
-sub1.subscribe(pub1, 'name:change')
-
-
-
-
+                  this.template.innerHTML = this.publisher.name || '';
+              }
+          }
+      ); 
+      // Subscribing to the publisher and an its change event
+      sub1.subscribe(pub1, 'name:change');
