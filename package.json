@@ -1,6 +1,6 @@
 {
   "name": "chakmak",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A small javascript pubsub framework",
   "main": "src/chakmak.js",
   "directories": {
